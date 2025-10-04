@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GST Calculator</title>
+  <script src="jquery-3.7.1.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f0f8ff; text-align: center; margin-top: 40px; }
+    .container { width: 420px; margin: auto; padding: 20px; background: #fff; border-radius: 15px; box-shadow: 0 0 10px #777; }
+    input, select, button { width: 80%; padding: 10px; margin: 10px 0; font-size: 1rem; }
+    button { background: #4CAF50; color: #fff; border: none; border-radius: 8px; cursor: pointer; }
+    button:hover { background: #388E3C; }
+    #result { font-size: 1.2rem; color: #333; margin-top: 20px; }
+    a { display: block; margin-top: 20px; text-decoration: none; color: #4CAF50; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>💰 GST Calculator</h2>
+
+    <label>Enter Amount (₹):</label><br>
+    <input type="number" id="amount" placeholder="Enter amount"><br>
+
+    <label>Select GST Rate:</label><br>
+    <select id="gst_rate">
+      <option value="">--Select GST--</option>
+      <option value="5">5%</option>
+      <option value="12">12%</option>
+      <option value="18">18%</option>
+      <option value="28">28%</option>
+    </select><br>
+
+    <button id="calc_gst">Calculate GST</button>
+
+    <div id="result"></div>
+
+    <a href="index.html">🏠 Back to Home</a>
+  </div>
+
+  <script>
+    $(document).ready(function(){
+      $("#calc_gst").click(function(){
+        let amount = parseFloat($("#amount").val());
+        let gst = parseFloat($("#gst_rate").val());
+
+        if(isNaN(amount) || isNaN(gst)){
+          alert("Please enter valid amount and select GST rate.");
+          return;
+        }
+
+        let gstAmount = (amount * gst) / 100;
+        let total = amount + gstAmount;
+
+        $("#result").html(
+          `<strong>Original Amount:</strong> ₹${amount.toFixed(2)}<br>
+           <strong>GST (${gst}%):</strong> ₹${gstAmount.toFixed(2)}<br>
+           <strong>Total Amount:</strong> ₹${total.toFixed(2)}`
+        );
+      });
+    });
+  </script>
+</body>
+</html>

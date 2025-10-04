@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cake Order Calculator</title>
+  <script src="jquery-3.7.1.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; background: #ffe8f0; text-align: center; margin-top: 40px; }
+    .container { width: 400px; margin: auto; padding: 20px; background: #fff; border-radius: 15px; box-shadow: 0 0 10px #aaa; }
+    input, select, button { width: 80%; padding: 10px; margin: 10px 0; font-size: 1rem; }
+    button { background: #e91e63; color: #fff; border: none; border-radius: 8px; cursor: pointer; }
+    button:hover { background: #c2185b; }
+    #result { font-size: 1.2rem; color: green; margin-top: 15px; }
+    a { display: block; margin-top: 20px; text-decoration: none; color: #e91e63; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🍰 Cake Order Bill Calculator</h2>
+
+    <label>Number of Cakes:</label><br>
+    <input type="number" id="cakes" placeholder="Enter quantity"><br>
+
+    <label>Price per Cake (₹):</label><br>
+    <input type="number" id="price" placeholder="Enter price per cake"><br>
+
+    <label>Choose Cake Type:</label><br>
+    <select id="type">
+      <option value="0">-- Select Type --</option>
+      <option value="0">Regular (No Extra)</option>
+      <option value="50">Chocolate (+ ₹50)</option>
+      <option value="80">Red Velvet (+ ₹80)</option>
+      <option value="100">Designer (+ ₹100)</option>
+    </select><br>
+
+    <button id="calculate">Calculate Bill</button>
+    <div id="result"></div>
+
+    <a href="index.html">🏠 Back to Home</a>
+  </div>
+
+  <script>
+    $(document).ready(function(){
+      $("#calculate").click(function(){
+        let qty = parseInt($("#cakes").val());
+        let price = parseFloat($("#price").val());
+        let extra = parseFloat($("#type").val());
+
+        if(isNaN(qty) || isNaN(price)){
+          alert("Please enter valid quantity and price!");
+          return;
+        }
+
+        let total = (price + extra) * qty;
+        $("#result").html("💰 Total Bill: ₹" + total.toFixed(2));
+      });
+    });
+  </script>
+</body>
+</html>
